@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workshop Attendance</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    background: url('https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUycjRrcjRtMHk4aHJ4ZXMyb3hoYXR1b3htNWYzdnd2MmlsZDQ1MDRiNyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cmypcc7bsTGi3Ob56E/giphy.gif') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* Loading Screen */
+  #loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.85);
+    color: #00ffcc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+  }
+
+  .loader-ring {
+    width: 80px;
+    height: 80px;
+    border: 8px solid rgba(0,255,204,0.3);
+    border-top: 8px solid #00ffcc;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .percent {
+    font-size: 18px;
+  }
+
+  /* Main content hidden initially */
+  #mainContent {
+    display: none;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Form container */
+  .container {
+    background: rgba(0,0,0,0.75);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow: 0 0 40px rgba(0,255,204,0.4);
+    color: #ffffff;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #00ffcc;
+  }
+
+  .workshop-info {
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: #a0f0e0;
+    line-height: 1.5;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  label {
+    font-size: 13px;
+    margin-bottom: 5px;
+    text-align: left;
+    display: block;
+  }
+
+  input, select, textarea {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #00ffcc;
+    background-color: rgba(30,30,30,0.9);
+    color: #ffffff;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #00ffcc;
+    box-shadow: 0 0 10px rgba(0,255,204,0.5);
+  }
+
+  textarea { resize: vertical; }
+
+  .btn {
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #00ffcc;
+    color: #000;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #00d1b2;
+  }
+
+  .clock {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #a0f0e0;
+  }
+
+  @media(max-width: 500px){
+    .container { padding: 25px; }
+    h1 { font-size: 22px; }
+    .workshop-info { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loadingScreen">
+  <div class="loader-ring"></div>
+  <div class="percent" id="percentText">0%</div>
+</div>
+
+<div id="mainContent">
+  <div class="container">
+    <h1>Workshop Attendance Form</h1>
+    <div class="workshop-info">
+      <p><strong>Date:</strong> 2026/11/15</p>
+      <p><strong>Time:</strong> 10:00 AM</p>
+      <p><strong>Location:</strong> Hall No.2, Chemistry Dept, Hall Number 1</p>
+    </div>
+
+    <form action="https://formspree.io/f/mblzvkke" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="academic-title">Academic Title</label>
+      <select id="academic-title" name="academic-title" required>
+        <option value="">Select Academic Title</option>
+        <option value="Research Assistant">Research Assistant</option>
+        <option value="Master Student">Master Student</option>
+        <option value="Assistant Lecturer">Assistant Lecturer</option>
+        <option value="Lecturer">Lecturer</option>
+        <option value="PhD Student">PhD Student</option>
+        <option value="Assistant Professor">Assistant Professor</option>
+        <option value="Professor">Professor</option>
+      </select>
+
+      <label for="department">Department</label>
+      <select id="department" name="department" required>
+        <option value="">Select Department</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Biology">Biology</option>
+        <option value="Environmental">Environmental</option>
+        <option value="Medicine">Medicine</option>
+      </select>
+
+      <label for="message">Message (optional)</label>
+      <textarea id="message" name="message" rows="3" placeholder="Write a note..."></textarea>
+
+      <button type="submit" class="btn">Attend</button>
+    </form>
+
+    <div class="clock" id="clock"></div>
+  </div>
+</div>
+
+<script>
+  // Loader with percentage
+  let percent = 0;
+  const percentText = document.getElementById('percentText');
+  const loadingScreen = document.getElementById('loadingScreen');
+  const mainContent = document.getElementById('mainContent');
+
+  const loadingInterval = setInterval(() => {
+    percent++;
+    percentText.textContent = percent + '%';
+    if(percent >= 100){
+      clearInterval(loadingInterval);
+      loadingScreen.style.display = 'none';
+      mainContent.style.display = 'flex';
+    }
+  }, 30);
+
+  // Live Clock
+  function updateClock() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('clock').textContent = now.toLocaleString('en-US', options);
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+</body>
+</html>
